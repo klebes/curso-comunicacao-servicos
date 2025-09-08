@@ -1,19 +1,29 @@
 package br.com.microservicos.product_api.model;
 
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Producto")
+@Table(name = "PRODUCTO")
 public class Producto {
+
+    @Id
     private Integer id;
+
+    @Column(name = "NAME", nullable = false)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_CATEGORY", nullable = false)
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_SUPPLIER",nullable = false)
     private Supplier supplier;
 }
